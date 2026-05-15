@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PIXELRIFT — Indie Game Store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header class="header">
+    <div class="header__inner">
+      <div class="header__logo">
+        <span class="logo-pixel">PIXEL</span><span class="logo-rift">RIFT</span>
+        <span class="logo-tag">// indie store</span>
+      </div>
+
+      <nav class="header__nav">
+        <a href="#tienda" class="nav-link">Tienda</a>
+        <a href="#categorias" class="nav-link">Categorías</a>
+        <a href="#sobre" class="nav-link">Sobre nosotros</a>
+      </nav>
+
+      <div class="header__actions">
+        <!-- Sesión de usuario -->
+        <div class="user-session" id="userSession">
+          <button class="btn-session" id="btnSession">
+            <span class="session-icon">👤</span>
+            <span id="sessionLabel">Iniciar sesión</span>
+          </button>
+          <div class="session-dropdown" id="sessionDropdown">
+            <div id="sessionLoginForm">
+              <p class="dropdown-title">Acceder a tu cuenta</p>
+              <input type="text" class="session-input" id="inputUsername" placeholder="Usuario" autocomplete="off" />
+              <input type="password" class="session-input" id="inputPassword" placeholder="Contraseña" />
+              <button class="btn-primary btn--sm" id="btnLogin">Entrar</button>
+              <p class="session-hint">Demo: usuario <strong>indie</strong> / pass <strong>1234</strong></p>
+            </div>
+            <div id="sessionUserPanel" style="display:none">
+              <p class="dropdown-title">Bienvenido/a,</p>
+              <p class="session-username" id="displayUsername"></p>
+              <div class="session-stats">
+                <span>🎮 Juegos: <strong id="statGames">0</strong></span>
+                <span>💰 Gastado: <strong id="statSpent">0€</strong></span>
+              </div>
+              <button class="btn-ghost btn--sm" id="btnLogout">Cerrar sesión</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Carrito -->
+        <button class="btn-cart" id="btnCart">
+          <span class="cart-icon">🛒</span>
+          <span class="cart-badge" id="cartBadge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero">
+    <div class="hero__bg">
+      <div class="scanlines"></div>
+      <div class="grid-overlay"></div>
+    </div>
+    <div class="hero__content">
+      <p class="hero__pre">// juegos independientes · únicos · auténticos</p>
+      <h1 class="hero__title">
+        Descubre el<br />
+        <span class="glitch" data-text="FUTURO INDIE">FUTURO INDIE</span>
+      </h1>
+      <p class="hero__sub">Más de 20 títulos seleccionados a mano. Sin publishers. Sin filtros corporativos.</p>
+      <a href="#tienda" class="btn-primary btn--lg">
+        <span>Explorar tienda</span>
+        <span class="btn-arrow">→</span>
+      </a>
+    </div>
+    <div class="hero__deco">
+      <div class="pixel-art-deco">
+        <div class="pa-screen">
+          <div class="pa-line"></div><div class="pa-line"></div><div class="pa-line"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TIENDA ========== -->
+  <main class="store" id="tienda">
+    <div class="store__inner">
+
+      <!-- Toolbar -->
+      <div class="store__toolbar" id="categorias">
+        <div class="toolbar__filters">
+          <span class="toolbar__label">Categoría:</span>
+          <div class="filter-pills" id="filterPills">
+            <button class="pill pill--active" data-cat="all">Todos</button>
+            <button class="pill" data-cat="accion">Acción</button>
+            <button class="pill" data-cat="aventura">Aventura</button>
+            <button class="pill" data-cat="roguelike">Roguelike</button>
+            <button class="pill" data-cat="puzzle">Puzzle</button>
+            <button class="pill" data-cat="rpg">RPG</button>
+          </div>
+        </div>
+        <div class="toolbar__sort">
+          <span class="toolbar__label">Ordenar:</span>
+          <select class="sort-select" id="sortSelect">
+            <option value="default">Por defecto</option>
+            <option value="price-asc">Precio: menor a mayor</option>
+            <option value="price-desc">Precio: mayor a menor</option>
+            <option value="name-asc">Nombre A–Z</option>
+            <option value="rating-desc">Mejor valorados</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Resultados info -->
+      <div class="store__info">
+        <span id="resultsCount">Mostrando 20 juegos</span>
+        <span class="store__info-sep">·</span>
+        <span id="activeFilter">Todos los géneros</span>
+      </div>
+
+      <!-- Grid de productos -->
+      <div class="products-grid" id="productsGrid">
+        <!-- Generado por JS -->
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ========== ABOUT ========== -->
+  <section class="about" id="sobre">
+    <div class="about__inner">
+      <div class="about__text">
+        <p class="section-pre">// nuestra misión</p>
+        <h2 class="section-title">Apoyamos a los <span class="accent">creadores reales</span></h2>
+        <p>PIXELRIFT nació con una idea simple: que los juegos independientes merecen un escaparate a su altura. Sin algoritmos que favorezcan a los grandes. Sin comisiones abusivas. Sin ruido corporativo.</p>
+        <p>Cada título que ves aquí ha pasado por nuestro equipo de curadores. Compramos directo al desarrollador.</p>
+      </div>
+      <div class="about__stats">
+        <div class="stat-card">
+          <span class="stat-num">200+</span>
+          <span class="stat-desc">Desarrolladores indie</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">50K</span>
+          <span class="stat-desc">Jugadores activos</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">92%</span>
+          <span class="stat-desc">Ingresos al dev</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <span class="logo-pixel">PIXEL</span><span class="logo-rift">RIFT</span>
+        <p>© 2026 PIXELRIFT. Todos los derechos reservados.</p>
+      </div>
+      <div class="footer__links">
+        <h4>Tienda</h4>
+        <a href="#">Todos los juegos</a>
+        <a href="#">Novedades</a>
+        <a href="#">Ofertas</a>
+      </div>
+      <div class="footer__links">
+        <h4>Soporte</h4>
+        <a href="#">FAQ</a>
+        <a href="#">Contacto</a>
+        <a href="#">Devoluciones</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========== CARRITO SIDEBAR ========== -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-sidebar" id="cartSidebar">
+    <div class="cart-sidebar__header">
+      <h3>Tu carrito</h3>
+      <button class="btn-close" id="btnCloseCart">✕</button>
+    </div>
+
+    <div class="cart-sidebar__body" id="cartBody">
+      <div class="cart-empty" id="cartEmpty">
+        <span class="cart-empty-icon">🎮</span>
+        <p>Tu carrito está vacío.</p>
+        <p class="cart-empty-sub">¡Añade algún juego para empezar!</p>
+      </div>
+      <ul class="cart-list" id="cartList"></ul>
+    </div>
+
+    <div class="cart-sidebar__footer" id="cartFooter">
+      <div class="cart-subtotal">
+        <span>Subtotal</span>
+        <span id="cartSubtotal">0,00 €</span>
+      </div>
+      <div class="cart-shipping" id="cartShipping">
+        <span>Envío</span>
+        <span id="shippingCost">—</span>
+      </div>
+      <div class="cart-total">
+        <span>Total</span>
+        <span id="cartTotal">0,00 €</span>
+      </div>
+      <p class="shipping-note" id="shippingNote"></p>
+      <button class="btn-primary btn--full" id="btnCheckout">Finalizar compra →</button>
+    </div>
+  </aside>
+
+  <!-- ========== TOAST ========== -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- ========== MODAL PRODUCTO ========== -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modal">
+      <button class="btn-close modal__close" id="btnCloseModal">✕</button>
+      <div class="modal__content" id="modalContent"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
